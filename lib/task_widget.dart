@@ -25,12 +25,12 @@ class _TaskWidgetState extends State<TaskWidget> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(icon: Icon(Icons.delete), onPressed: (){
+            IconButton(icon: Icon(Icons.delete,), onPressed: (){
 
               showDialog(
               context: context,
               builder: (BuildContext context){
-                return AlertDialog(title: Text("Delete")
+                return AlertDialog(title: Text("Delete Task")
                 ,content: Text("Delete a task"),
                 actions: <Widget>[
                 FlatButton(child: Text("Ok"), onPressed:() {

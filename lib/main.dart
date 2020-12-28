@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:todolistapp/task_model.dart';
 import 'package:todolistapp/task_widget.dart';
@@ -38,18 +40,20 @@ class _TabBarPageState extends State<TabBarPage> with SingleTickerProviderStateM
     return Scaffold(
       drawer: Drawer(),
       appBar: AppBar(
-        title: Text('Todo'),
+        title: Text('TodoList',style:TextStyle(fontWeight:FontWeight.bold,fontSize:28 ),),
         bottom: TabBar(
           controller: tabController,
           
           tabs: [
             Tab(
-              text: 'All Tasks',
+              text: 'All Tasks' ,
               
             ),Tab(
               text: 'Complete Tasks',
+
             ),Tab(
               text: 'Incomplete Tasks',
+
             ),
           ],
           isScrollable: true,),
@@ -58,8 +62,12 @@ class _TabBarPageState extends State<TabBarPage> with SingleTickerProviderStateM
         children: [
           Expanded(
             child: TabBarView(
+              
               controller: tabController,
-              children: [AllTasks(tasks),CompleteTasks(),IncompleteTasks()],
+              children: [
+                AllTasks(tasks),
+                CompleteTasks(),
+                IncompleteTasks()],
 
             ),
           ),
@@ -134,6 +142,8 @@ class _AllTasksState extends State<AllTasks> {
       // ),
     );
   }
+
+
 }class CompleteTasks extends StatefulWidget{
   @override
   _CompleteTasksState createState() => _CompleteTasksState();
@@ -181,6 +191,8 @@ class _CompleteTasksState extends State<CompleteTasks> {
       ),
     );
   }
+
+  
 }class IncompleteTasks extends StatefulWidget{
   @override
   _IncompleteTasksState createState() => _IncompleteTasksState();
@@ -209,6 +221,7 @@ class _IncompleteTasksState extends State<IncompleteTasks> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       child: FutureBuilder<List<Task>>(
         future: DBHelper.dbHelper.selectSpecificTask(0),
         builder: (context,snapshot){
@@ -221,6 +234,7 @@ class _IncompleteTasksState extends State<IncompleteTasks> {
             List<Task> data =snapshot.data;
             return ListView(
               children: [
+
                 getTaskWidgets(data),
               ],
             );

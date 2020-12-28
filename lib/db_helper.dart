@@ -8,10 +8,10 @@ class DBHelper{
   
   static DBHelper dbHelper = DBHelper._();
 
-  static final String databaseName = 'tasksDB.db' ;
+  static final String databaseName = 'tasksdb.db' ;
   static final String tableName = 'tasks' ;
   static final String taskIdColumnName = 'id' ;
-  static final String taskNameColumnName = 'name' ;
+  static final String taskNameColumnName = 'taskname' ;
   static final String taskIsCompleteColumnName = 'isComplete' ;
 
   Database database ;
@@ -53,8 +53,10 @@ class DBHelper{
       database = await initDatabase();
       int x = await database.insert(tableName, task.toJson());
       print(x);
+
     } on Exception catch (e) {
       print(e);
+
     }
   }
 
@@ -65,8 +67,10 @@ class DBHelper{
       List<Map> result = await database.query(tableName);
       List<Task> tasks = result.map((e) => Task.fromJson(e)).toList();
       return tasks;
+
     } on Exception catch (e) {
       print(e);
+
     }
   }
 
@@ -74,11 +78,13 @@ class DBHelper{
   Future<List<Task>> selectSpecificTask(int isComplete) async{
     try {
       database = await initDatabase();
-      List<Map> result = await database.query(tableName , where: '$taskIsCompleteColumnName=?' , whereArgs: [isComplete]);
+      List<Map> result = await database.query(tableName , where: '$taskIsCompleteColumnName =?' , whereArgs: [isComplete]);
       List<Task> tasks = result.map((e) => Task.fromJson(e)).toList();
       return tasks;
+
     } on Exception catch (e) {
       print(e);
+      
     }
   }
 
@@ -86,10 +92,12 @@ class DBHelper{
   updateTask(Task task)async{
     try {
       database = await initDatabase();
-      int result = await database.update(tableName , task.toJson() , where: '$taskIdColumnName=?' , whereArgs: [task.id]);
+      int result = await database.update(tableName , task.toJson() , where: '$taskIdColumnName =?' , whereArgs: [task.id]);
       print(result);
+
     } on Exception catch (e) {
       print(e);
+
     }
   }
   
@@ -97,10 +105,12 @@ class DBHelper{
   deleteTask(Task task)async{
     try {
       database = await initDatabase();
-      int result = await database.delete(tableName , where: '$taskIdColumnName=?' , whereArgs: [task.id]);
+      int result = await database.delete(tableName , where: '$taskIdColumnName =?' , whereArgs: [task.id]);
       print(result);
+
     } on Exception catch (e) {
       print(e);
+
     }
   }
 
