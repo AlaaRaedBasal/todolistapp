@@ -1,10 +1,12 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
+import 'package:splashscreen/splashscreen.dart';
+import 'package:todolistapp/providerApp.dart';
 import 'package:todolistapp/task_model.dart';
 import 'package:todolistapp/task_widget.dart';
 import 'AddTask.dart';
 import 'db_helper.dart';
+import 'package:provider/provider.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -13,9 +15,37 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider(
+       create:(context){
+       return AppProvider();
+      },
+   child:MaterialApp(
+     title: 'Splash Screen',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
       debugShowCheckedModeBanner: false,
-      home: TabBarPage(),
+      home: Splash(),
+      //home: TabBarPage(),
+    ),
+    );
+  }
+}
+class Splash extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SplashScreen(
+      seconds: 6,
+      navigateAfterSeconds: new TabBarPage(),
+      title: new Text(
+        'ToDo List App',
+        textScaleFactor: 2,
+        style: TextStyle(color: Colors.blue),
+      ),
+      
+      loadingText: Text("Loading"),
+      photoSize: 100.0,
+      loaderColor: Colors.blue,
     );
   }
 }

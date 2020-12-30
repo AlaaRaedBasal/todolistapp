@@ -1,3 +1,4 @@
+
 import 'db_helper.dart';
 
 class Task {
@@ -18,7 +19,7 @@ class Task {
     return {
       DBHelper.taskIdColumnName : this.id,
       DBHelper.taskNameColumnName : this.taskName,
-      DBHelper.taskIsCompleteColumnName : this.isComplete ? 1 : 0
+      DBHelper.taskIsCompleteColumnName : this.isComplete ? 1 : 0,
     };
 
   }
